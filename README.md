@@ -9,6 +9,7 @@
 
 # How to use
 - Install MySql and Java VM
+- Projeto feito no NetBeans
 - Para inicializar o BD é necessário que o script.sql seja executado no MySql
 - Arquivo JAR se encontra na pasta "\AlugaCarro\dist\AlugaCarro.jar"
 
