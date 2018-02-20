@@ -13,7 +13,7 @@
 - Para inicializar o BD é necessário que o script.sql seja executado no MySql
 - Arquivo JAR se encontra na pasta "\AlugaCarro\dist\AlugaCarro.jar"
 
-# Aparência do Programa
+# Aparência do Software
 ![Windows1](print1.jpg)
 ![Windows2](print2.jpg)
 ![Windows3](print3.jpg)
