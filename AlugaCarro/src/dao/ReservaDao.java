@@ -45,6 +45,7 @@ public class ReservaDao {
         try {
             stmt = con.prepareStatement("SELECT * FROM Reservas");
             rs = stmt.executeQuery();
+            System.out.println(stmt);
             while (rs.next()){
                 Reserva r = new Reserva(rs.getString("Clientes_cpf"),rs.getString("Carros_placa"));
                 reservas.add(r);

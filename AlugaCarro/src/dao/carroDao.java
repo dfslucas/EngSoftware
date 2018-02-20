@@ -45,7 +45,7 @@ public class CarroDao {
         try {
             stmt = con.prepareStatement("SELECT * FROM Carros");
             rs = stmt.executeQuery();
-            System.out.println(stmt);
+            
             while (rs.next()){
                 Carro car = new Carro(rs.getString("placa"),rs.getString("modelo"));
                 carros.add(car);
