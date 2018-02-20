@@ -8,11 +8,11 @@
 - Lucas Dau F. Souza - 14.1.8320
 
 # How to use
-- Intall MySql and Java VM
+- Install MySql and Java VM
 - Para inicializar o BD é necessário que o script.sql seja executado no MySql
 - Arquivo JAR se encontra na pasta "\AlugaCarro\dist\AlugaCarro.jar"
 
-# Aparencia do Programa
+# Aparência do Programa
 ![Windows1](print1.jpg)
 ![Windows2](print2.jpg)
 ![Windows3](print3.jpg)
