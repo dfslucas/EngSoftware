@@ -109,6 +109,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel16 = new javax.swing.JLabel();
         panelCadCarro = new javax.swing.JPanel();
         fModelCarro = new javax.swing.JTextField();
         fPlacaCarro = new javax.swing.JTextField();
@@ -167,7 +168,10 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aluga Carro");
+        setBackground(new java.awt.Color(0, 102, 102));
         setMaximumSize(new java.awt.Dimension(350, 600));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iFrame/background.jpg"))); // NOI18N
 
         jLabel5.setText("Modelo");
 
@@ -209,7 +213,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCadCarroLayout.createSequentialGroup()
                         .addGap(168, 168, 168)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 154, Short.MAX_VALUE))
+                        .addGap(0, 168, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCadCarroLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +222,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5))
-                                .addGap(0, 532, Short.MAX_VALUE)))))
+                                .addGap(0, 546, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         panelCadCarroLayout.setVerticalGroup(
@@ -289,7 +293,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltClienteLayout.createSequentialGroup()
                         .addGroup(panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                             .addComponent(fNomeCliente1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fCPFCliente1)
                             .addComponent(fEnderecoCliente1)
@@ -380,7 +384,7 @@ public class Main extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCadClienteLayout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
+                .addContainerGap(183, Short.MAX_VALUE)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(163, 163, 163))
         );
@@ -471,7 +475,7 @@ public class Main extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelAltCarroLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltCarroLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -544,7 +548,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(155, 155, 155))
             .addGroup(panelReservaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReservaLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
@@ -637,7 +641,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
+            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -666,7 +670,10 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -702,7 +709,7 @@ public class Main extends javax.swing.JFrame {
         System.out.println("CARRO");
         this.panelCadCarro.setVisible(false);
         this.panelCadCliente.setVisible(true);
-        
+        this.jLabel16.setVisible(false);
         this.panelAltCliente.setVisible(false);
         this.panelAltCarro.setVisible(false);
     }//GEN-LAST:event_CadastroClienteActionPerformed
@@ -714,7 +721,7 @@ public class Main extends javax.swing.JFrame {
         
         this.panelAltCliente.setVisible(false);
         this.panelAltCarro.setVisible(false);
-        
+        this.jLabel16.setVisible(false);
         this.panelReserva.setVisible(false);
     }//GEN-LAST:event_CadastroCarroActionPerformed
 
@@ -725,7 +732,7 @@ public class Main extends javax.swing.JFrame {
         
         this.panelCadCarro.setVisible(false);
         this.panelCadCliente.setVisible(false);
-        
+        this.jLabel16.setVisible(false);
         this.panelReserva.setVisible(false);
                TabelaCarros();
 
@@ -738,7 +745,7 @@ public class Main extends javax.swing.JFrame {
         
         this.panelCadCarro.setVisible(false);
         this.panelCadCliente.setVisible(false);
-        
+        this.jLabel16.setVisible(false);
         this.panelReserva.setVisible(false);
         TabelaClientes();
  
@@ -776,7 +783,7 @@ public class Main extends javax.swing.JFrame {
         
         this.panelCadCarro.setVisible(false);
         this.panelCadCliente.setVisible(false);
-        
+        this.jLabel16.setVisible(false);
         TabelaReserva();
         boxClientes();
         boxCarros();
@@ -912,6 +919,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
