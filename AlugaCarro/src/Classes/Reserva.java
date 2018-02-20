@@ -14,6 +14,11 @@ public class Reserva {
     public Reserva() {
     }
 
+    public Reserva(String clienteCPF, String carPLACA) {
+        this.clienteCPF = clienteCPF;
+        this.carPLACA = carPLACA;
+    }
+
     public String getClienteCPF() {
         return clienteCPF;
     }
