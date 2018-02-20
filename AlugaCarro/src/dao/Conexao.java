@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
 public class Conexao {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/aluguelcarro?autoReconnect=true&useSSL=false";
-    private static String USER = "aluguel";
-    private static final String PASS = "1234";
+    private static String USER = "root";
+    private static final String PASS = "root";
     
 public static Connection getConnection(){
     try {   

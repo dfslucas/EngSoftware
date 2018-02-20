@@ -23,7 +23,7 @@ public class CarroDao {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("INSERT INTO Avaliacao (placa, modelo)VALUES(?,?)");
+            stmt = con.prepareStatement("INSERT INTO Carros (placa, modelo)VALUES(?,?)");
             stmt.setString(1,car.getPlaca());
             stmt.setString(2,car.getModelo());
              
@@ -43,8 +43,9 @@ public class CarroDao {
         List <Carro> carros = new ArrayList<>();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM Avaliacao");
+            stmt = con.prepareStatement("SELECT * FROM Carros");
             rs = stmt.executeQuery();
+            System.out.println(stmt);
             while (rs.next()){
                 Carro car = new Carro(rs.getString("placa"),rs.getString("modelo"));
                 carros.add(car);
@@ -63,7 +64,7 @@ public class CarroDao {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("UPDATE Avaliacao SET modelo = ? WHERE placa = ?");
+            stmt = con.prepareStatement("UPDATE Carros SET modelo = ? WHERE placa = ?");
             stmt.setString(1,car.getModelo());
             stmt.setString(2,car.getPlaca());
 

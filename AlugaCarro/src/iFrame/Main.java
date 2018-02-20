@@ -8,6 +8,7 @@ package iFrame;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import dao.*;
+import Classes.*;
 
 /**
  *
@@ -25,27 +26,77 @@ public class Main extends javax.swing.JFrame {
         this.panelCadCarro.setVisible(false);
         this.panelCadCliente.setVisible(false);
         this.panelReserva.setVisible(false);
+        
+        TabelaClientes();
+        TabelaCarros();
+        TabelaReserva();
+        boxClientes();
+        boxCarros();
+        
     }
     
+    /*Preenche JTable da Window AlteraCliente com os Clientes Cadastrados */
     public void TabelaClientes(){
-        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TableCliente.getModel();
         modelo.setNumRows(0);
         ClienteDao dao = new ClienteDao();
+        
         for(Cliente list: dao.select() ){
-            
             modelo.addRow(new Object[]{
-                list.getPropriedadeNome(),
-                list.getNumero(),
-        });
+                list.getNome(),
+                list.getCpf(),
+                list.getEndereco()
+            });
         }
     }
-    public void readComboBox(){
-        DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) boxPropriedade.getModel();
+    
+    /*Preenche JTable da Window AlteraCarros com os Carros Cadastrados */
+    public void TabelaCarros(){
+        DefaultTableModel modelo = (DefaultTableModel) TableCarro.getModel();
+        modelo.setNumRows(0);
+        CarroDao dao = new CarroDao();
+        for(Carro list: dao.select() ){
+            modelo.addRow(new Object[]{
+                list.getPlaca(),
+                list.getModelo()
+            });
+        }
+    }
+    
+    /*Preenche JTable da Window Reservas com os Reservas Cadastradas */
+    public void TabelaReserva(){
+        DefaultTableModel modelo = (DefaultTableModel) TabelaReserva.getModel();
+        modelo.setNumRows(0);
+        ReservaDao dao = new ReservaDao();
+        for(Reserva list: dao.select() ){
+            
+            modelo.addRow(new Object[]{
+                list.getClienteCPF(),
+                list.getCarPLACA()
+            });
+        }
+    }
+    
+    /*Preenche ComboBox da Window Reservas com os Clientes Cadastrados */
+    public void boxClientes(){
+        DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) boxCliente.getModel();
         modelo1.removeAllElements();
-        PropriedadeDao cdao = new PropriedadeDao();
+        ClienteDao cdao = new ClienteDao();
 
-        for(Propriedade list: cdao.select() ){
-            modelo1.addElement(list.getNome());
+        for(Cliente list: cdao.select() ){
+            modelo1.addElement(list.getCpf());
+        }
+
+    }
+    
+    /*Preenche ComboBox da Window Reservas com os Carros Cadastrados */
+    public void boxCarros(){
+        DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) boxCarro.getModel();
+        modelo1.removeAllElements();
+        CarroDao cdao = new CarroDao();
+
+        for(Carro list: cdao.select() ){
+            modelo1.addElement(list.getPlaca());
         }
 
     }
@@ -68,7 +119,7 @@ public class Main extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelAltCliente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableCliente = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -89,7 +140,7 @@ public class Main extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         panelAltCarro = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TableCarro = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -98,7 +149,7 @@ public class Main extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         panelReserva = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        TabelaReserva = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         salvarReserva = new javax.swing.JButton();
@@ -113,6 +164,10 @@ public class Main extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         AlteraCarro = new javax.swing.JMenuItem();
         AlteraCliente = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Aluga Carro");
+        setMaximumSize(new java.awt.Dimension(350, 600));
 
         fPlacaCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,15 +236,23 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(169, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
             new String [] {
                 "Nome", "CPF", "Endereço"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TableCliente);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -340,7 +403,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(144, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TableCarro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -350,8 +413,16 @@ public class Main extends javax.swing.JFrame {
             new String [] {
                 "Placa", "Modelo"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TableCarro);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -423,11 +494,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Aluga Carro");
-        setMaximumSize(new java.awt.Dimension(350, 600));
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaReserva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -435,10 +502,18 @@ public class Main extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Placa", "Modelo"
+                "CPF", "PLACA"
             }
-        ));
-        jScrollPane3.setViewportView(jTable3);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(TabelaReserva);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -465,7 +540,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(155, 155, 155))
             .addGroup(panelReservaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReservaLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
@@ -558,16 +633,61 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panelReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+            .addGap(0, 606, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelCadCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelAltCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelCadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelAltCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
+            .addGap(0, 449, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelCadCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelAltCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelCadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelAltCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -603,6 +723,8 @@ public class Main extends javax.swing.JFrame {
         this.panelCadCliente.setVisible(false);
         
         this.panelReserva.setVisible(false);
+               TabelaCarros();
+
     }//GEN-LAST:event_AlteraCarroActionPerformed
 
     private void AlteraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlteraClienteActionPerformed
@@ -614,6 +736,8 @@ public class Main extends javax.swing.JFrame {
         this.panelCadCliente.setVisible(false);
         
         this.panelReserva.setVisible(false);
+        TabelaClientes();
+ 
     }//GEN-LAST:event_AlteraClienteActionPerformed
 
     private void fCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fCPFClienteActionPerformed
@@ -653,6 +777,10 @@ public class Main extends javax.swing.JFrame {
         
         this.panelCadCarro.setVisible(false);
         this.panelCadCliente.setVisible(false);
+        
+        TabelaReserva();
+        boxClientes();
+        boxCarros();
     }//GEN-LAST:event_ReservaActionPerformed
 
     /**
@@ -699,6 +827,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem CadastroCarro;
     private javax.swing.JMenuItem CadastroCliente;
     private javax.swing.JMenuItem Reserva;
+    private javax.swing.JTable TabelaReserva;
+    private javax.swing.JTable TableCarro;
+    private javax.swing.JTable TableCliente;
     private javax.swing.JButton bLimpaCarro;
     private javax.swing.JButton bSalvar;
     private javax.swing.JButton bSalvarCarro;
@@ -740,9 +871,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JPanel panelAltCarro;
     private javax.swing.JPanel panelAltCliente;
     private javax.swing.JPanel panelCadCarro;

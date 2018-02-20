@@ -23,7 +23,7 @@ public class ReservaDao {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("INSERT INTO Clientes (Clientes_cpf, Carros_placa)VALUES(?,?)");
+            stmt = con.prepareStatement("INSERT INTO Reservas (Clientes_cpf, Carros_placa)VALUES(?,?)");
             stmt.setString(1,r.getCarPLACA());
             stmt.setString(2,r.getClienteCPF());
              
