@@ -25,7 +25,7 @@ public static Connection getConnection(){
         Class.forName(DRIVER);
         return DriverManager.getConnection(URL, USER, PASS);
     } catch (ClassNotFoundException | SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Erro ao conectar: ");
+        JOptionPane.showMessageDialog(null, "Erro ao conectar o banco de dados!");
         throw new RuntimeException("Erro na conexao: ",ex);
     }
 }

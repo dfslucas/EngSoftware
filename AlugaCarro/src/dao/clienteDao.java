@@ -31,7 +31,7 @@ public class ClienteDao {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: ");
+            JOptionPane.showMessageDialog(null, "Erro ao salvar, entre em contato com o Programador");
         }finally{
             Conexao.closeConnection(con, stmt);
         }
@@ -51,7 +51,7 @@ public class ClienteDao {
                 clientes.add(c);
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(CervejaDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao carregar, entre em contato com o Programador");
         }finally{
            Conexao.closeConnection(con, stmt, rs);
         }
@@ -72,7 +72,7 @@ public class ClienteDao {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao alterar, entre em contato com o Programador");
         }finally{
             Conexao.closeConnection(con, stmt);
         }

@@ -84,7 +84,7 @@ public class Main extends javax.swing.JFrame {
         ClienteDao cdao = new ClienteDao();
 
         for(Cliente list: cdao.select() ){
-            modelo1.addElement(list.getCpf());
+            modelo1.addElement(list.getCpf()+ ">" + list.getNome());
         }
 
     }
@@ -114,8 +114,8 @@ public class Main extends javax.swing.JFrame {
         fPlacaCarro = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        bSalvarCarro = new javax.swing.JButton();
-        bLimpaCarro = new javax.swing.JButton();
+        SalvarCadastroCarro = new javax.swing.JButton();
+        LimparCadastroCarro = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         panelAltCliente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -127,7 +127,7 @@ public class Main extends javax.swing.JFrame {
         fEnderecoCliente1 = new javax.swing.JTextField();
         fCPFCliente1 = new javax.swing.JTextField();
         fNomeCliente1 = new javax.swing.JTextField();
-        bSalvar = new javax.swing.JButton();
+        SalvarAlteracaoCliente = new javax.swing.JButton();
         panelCadCliente = new javax.swing.JPanel();
         fNomeCliente = new javax.swing.JTextField();
         fCPFCliente = new javax.swing.JTextField();
@@ -135,8 +135,8 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        SalvarCadastroCliente = new javax.swing.JButton();
+        LimparCadastroCliente = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         panelAltCarro = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -146,13 +146,13 @@ public class Main extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         fPlacaCarro1 = new javax.swing.JTextField();
         fModelCarro1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        SalvarAlteracaoCarro = new javax.swing.JButton();
         panelReserva = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TabelaReserva = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        salvarReserva = new javax.swing.JButton();
+        SalvarReserva = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         boxCliente = new javax.swing.JComboBox<>();
         boxCarro = new javax.swing.JComboBox<>();
@@ -169,19 +169,23 @@ public class Main extends javax.swing.JFrame {
         setTitle("Aluga Carro");
         setMaximumSize(new java.awt.Dimension(350, 600));
 
-        fPlacaCarro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fPlacaCarroActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Modelo");
 
         jLabel6.setText("Placa");
 
-        bSalvarCarro.setText("SALVAR");
+        SalvarCadastroCarro.setText("SALVAR");
+        SalvarCadastroCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarCadastroCarroActionPerformed(evt);
+            }
+        });
 
-        bLimpaCarro.setText("LIMPAR");
+        LimparCadastroCarro.setText("LIMPAR");
+        LimparCadastroCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparCadastroCarroActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -193,9 +197,9 @@ public class Main extends javax.swing.JFrame {
             panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCadCarroLayout.createSequentialGroup()
                 .addGap(188, 188, 188)
-                .addComponent(bSalvarCarro)
+                .addComponent(SalvarCadastroCarro)
                 .addGap(61, 61, 61)
-                .addComponent(bLimpaCarro)
+                .addComponent(LimparCadastroCarro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCadCarroLayout.createSequentialGroup()
                 .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -231,8 +235,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(fPlacaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bSalvarCarro)
-                    .addComponent(bLimpaCarro))
+                    .addComponent(SalvarCadastroCarro)
+                    .addComponent(LimparCadastroCarro))
                 .addContainerGap(169, Short.MAX_VALUE))
         );
 
@@ -252,6 +256,11 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TableCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableCliente);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -264,19 +273,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel10.setText("Endereço");
 
-        fEnderecoCliente1.addActionListener(new java.awt.event.ActionListener() {
+        SalvarAlteracaoCliente.setText("Salvar");
+        SalvarAlteracaoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fEnderecoCliente1ActionPerformed(evt);
+                SalvarAlteracaoClienteActionPerformed(evt);
             }
         });
-
-        fCPFCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fCPFCliente1ActionPerformed(evt);
-            }
-        });
-
-        bSalvar.setText("Salvar");
 
         javax.swing.GroupLayout panelAltClienteLayout = new javax.swing.GroupLayout(panelAltCliente);
         panelAltCliente.setLayout(panelAltClienteLayout);
@@ -300,7 +302,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltClienteLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bSalvar)
+                        .addComponent(SalvarAlteracaoCliente)
                         .addGap(252, 252, 252))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -325,17 +327,11 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fEnderecoCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bSalvar)
+                .addComponent(SalvarAlteracaoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
-
-        fCPFCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fCPFClienteActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Nome");
 
@@ -343,9 +339,19 @@ public class Main extends javax.swing.JFrame {
 
         jLabel3.setText("Endereço");
 
-        jButton1.setText("SALVAR");
+        SalvarCadastroCliente.setText("SALVAR");
+        SalvarCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarCadastroClienteActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("LIMPAR");
+        LimparCadastroCliente.setText("LIMPAR");
+        LimparCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparCadastroClienteActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -358,17 +364,16 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelCadClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCadClienteLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jButton1)
-                        .addGap(61, 61, 61)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(fNomeCliente, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(fCPFCliente)
                     .addComponent(fEnderecoCliente)
                     .addGroup(panelCadClienteLayout.createSequentialGroup()
                         .addGroup(panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCadClienteLayout.createSequentialGroup()
+                                .addGap(178, 178, 178)
+                                .addComponent(SalvarCadastroCliente)
+                                .addGap(61, 61, 61)
+                                .addComponent(LimparCadastroCliente))
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
@@ -398,8 +403,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(fEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(SalvarCadastroCliente)
+                    .addComponent(LimparCadastroCliente))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
 
@@ -422,6 +427,11 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TableCarro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableCarroMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TableCarro);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -432,16 +442,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel13.setText("Modelo");
 
-        fPlacaCarro1.addActionListener(new java.awt.event.ActionListener() {
+        SalvarAlteracaoCarro.setText("SALVAR");
+        SalvarAlteracaoCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fPlacaCarro1ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("SALVAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                SalvarAlteracaoCarroActionPerformed(evt);
             }
         });
 
@@ -463,7 +467,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(panelAltCarroLayout.createSequentialGroup()
                         .addGap(251, 251, 251)
-                        .addComponent(jButton3)
+                        .addComponent(SalvarAlteracaoCarro)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelAltCarroLayout.createSequentialGroup()
                         .addContainerGap()
@@ -488,7 +492,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(fPlacaCarro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(SalvarAlteracaoCarro)
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(84, Short.MAX_VALUE))
@@ -521,10 +525,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel17.setText("Cliente");
 
-        salvarReserva.setText("SALVAR");
-        salvarReserva.addActionListener(new java.awt.event.ActionListener() {
+        SalvarReserva.setText("SALVAR");
+        SalvarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarReservaActionPerformed(evt);
+                SalvarReservaActionPerformed(evt);
             }
         });
 
@@ -556,7 +560,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(101, 101, 101))
             .addGroup(panelReservaLayout.createSequentialGroup()
                 .addGap(246, 246, 246)
-                .addComponent(salvarReserva)
+                .addComponent(SalvarReserva)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelReservaLayout.setVerticalGroup(
@@ -573,7 +577,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(salvarReserva)
+                .addComponent(SalvarReserva)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -740,33 +744,28 @@ public class Main extends javax.swing.JFrame {
  
     }//GEN-LAST:event_AlteraClienteActionPerformed
 
-    private void fCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fCPFClienteActionPerformed
+    private void SalvarAlteracaoCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarAlteracaoCarroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fCPFClienteActionPerformed
+        Carro ca = new Carro(fPlacaCarro1.getText(), fModelCarro1.getText());
+        CarroDao caDao = new CarroDao();
+        
+        caDao.update(ca);
+        TabelaCarros();
+    }//GEN-LAST:event_SalvarAlteracaoCarroActionPerformed
 
-    private void fPlacaCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fPlacaCarroActionPerformed
+    private void SalvarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarReservaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fPlacaCarroActionPerformed
-
-    private void fCPFCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fCPFCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fCPFCliente1ActionPerformed
-
-    private void fEnderecoCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEnderecoCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fEnderecoCliente1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void fPlacaCarro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fPlacaCarro1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fPlacaCarro1ActionPerformed
-
-    private void salvarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarReservaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salvarReservaActionPerformed
+        String chave[] = new String[2];
+        chave = boxCliente.getSelectedItem().toString().split(">");
+        System.out.println(chave[0]);
+        Reserva re = new Reserva(chave[0].toString(),boxCarro.getSelectedItem().toString());
+        ReservaDao reDao = new ReservaDao();
+        
+        reDao.create(re);
+        TabelaReserva();
+        
+        
+    }//GEN-LAST:event_SalvarReservaActionPerformed
 
     private void ReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservaActionPerformed
         // TODO add your handling code here:
@@ -782,6 +781,63 @@ public class Main extends javax.swing.JFrame {
         boxClientes();
         boxCarros();
     }//GEN-LAST:event_ReservaActionPerformed
+
+    private void TableCarroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableCarroMouseClicked
+        // TODO add your handling code here:
+        if(TableCarro.getSelectedRow() != -1){
+           fPlacaCarro1.setText(TableCarro.getValueAt(TableCarro.getSelectedRow(),0).toString());
+           fModelCarro1.setText(TableCarro.getValueAt(TableCarro.getSelectedRow(),1).toString());
+        }
+    }//GEN-LAST:event_TableCarroMouseClicked
+
+    private void SalvarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarCadastroClienteActionPerformed
+        // TODO add your handling code here:
+        Cliente c = new Cliente(fNomeCliente.getText(), fCPFCliente.getText(),fEnderecoCliente.getText());
+        ClienteDao cDao = new ClienteDao();
+        
+        cDao.create(c);
+        
+    }//GEN-LAST:event_SalvarCadastroClienteActionPerformed
+
+    private void LimparCadastroCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparCadastroCarroActionPerformed
+        // TODO add your handling code here:
+        fModelCarro.setText("");
+        fPlacaCarro.setText("");
+    }//GEN-LAST:event_LimparCadastroCarroActionPerformed
+
+    private void LimparCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparCadastroClienteActionPerformed
+        // TODO add your handling code here:
+        fNomeCliente.setText("");
+        fCPFCliente.setText("");
+        fEnderecoCliente.setText("");
+    }//GEN-LAST:event_LimparCadastroClienteActionPerformed
+
+    private void SalvarCadastroCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarCadastroCarroActionPerformed
+        // TODO add your handling code here:
+        Carro ca = new Carro(fPlacaCarro.getText(), fModelCarro.getText());
+        CarroDao caDao = new CarroDao();
+        
+        caDao.create(ca);
+        
+    }//GEN-LAST:event_SalvarCadastroCarroActionPerformed
+
+    private void SalvarAlteracaoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarAlteracaoClienteActionPerformed
+        // TODO add your handling code here:
+        Cliente c = new Cliente(fNomeCliente1.getText(), fCPFCliente1.getText(), fEnderecoCliente1.getText());
+        ClienteDao cDao = new ClienteDao();
+        
+        cDao.update(c);
+        TabelaClientes();
+    }//GEN-LAST:event_SalvarAlteracaoClienteActionPerformed
+
+    private void TableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableClienteMouseClicked
+        // TODO add your handling code here:
+        if(TableCliente.getSelectedRow() != -1){
+           fNomeCliente1.setText(TableCliente.getValueAt(TableCliente.getSelectedRow(),0).toString());
+           fCPFCliente1.setText(TableCliente.getValueAt(TableCliente.getSelectedRow(),1).toString());
+           fEnderecoCliente1.setText(TableCliente.getValueAt(TableCliente.getSelectedRow(),2).toString());
+        }
+    }//GEN-LAST:event_TableClienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -826,13 +882,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem AlteraCliente;
     private javax.swing.JMenuItem CadastroCarro;
     private javax.swing.JMenuItem CadastroCliente;
+    private javax.swing.JButton LimparCadastroCarro;
+    private javax.swing.JButton LimparCadastroCliente;
     private javax.swing.JMenuItem Reserva;
+    private javax.swing.JButton SalvarAlteracaoCarro;
+    private javax.swing.JButton SalvarAlteracaoCliente;
+    private javax.swing.JButton SalvarCadastroCarro;
+    private javax.swing.JButton SalvarCadastroCliente;
+    private javax.swing.JButton SalvarReserva;
     private javax.swing.JTable TabelaReserva;
     private javax.swing.JTable TableCarro;
     private javax.swing.JTable TableCliente;
-    private javax.swing.JButton bLimpaCarro;
-    private javax.swing.JButton bSalvar;
-    private javax.swing.JButton bSalvarCarro;
     private javax.swing.JComboBox<String> boxCarro;
     private javax.swing.JComboBox<String> boxCliente;
     private javax.swing.JTextField fCPFCliente;
@@ -845,9 +905,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField fNomeCliente1;
     private javax.swing.JTextField fPlacaCarro;
     private javax.swing.JTextField fPlacaCarro1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -876,6 +933,5 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel panelCadCarro;
     private javax.swing.JPanel panelCadCliente;
     private javax.swing.JPanel panelReserva;
-    private javax.swing.JButton salvarReserva;
     // End of variables declaration//GEN-END:variables
 }

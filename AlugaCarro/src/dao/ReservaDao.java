@@ -24,13 +24,14 @@ public class ReservaDao {
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement("INSERT INTO Reservas (Clientes_cpf, Carros_placa)VALUES(?,?)");
-            stmt.setString(1,r.getCarPLACA());
-            stmt.setString(2,r.getClienteCPF());
+            stmt.setString(1,r.getClienteCPF());
+            stmt.setString(2,r.getCarPLACA());
+            
              
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: ");
+            JOptionPane.showMessageDialog(null, "Erro ao salvar, entre em contato com o Programador");
         }finally{
             Conexao.closeConnection(con, stmt);
         }
@@ -51,7 +52,7 @@ public class ReservaDao {
                 reservas.add(r);
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(CervejaDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao carregar, entre em contato com o Programador");
         }finally{
            Conexao.closeConnection(con, stmt, rs);
         }
