@@ -1,6 +1,5 @@
-
-# EngSoftware
-- Trabalho prático de Engenharia de Software, Prof. Euler Horta Marinho.
+# UFOP|ICEA - Engenharia de Software 17.2
+- Prof. Euler Horta Marinho.
 
 # Grupo 
 - Isabela Cristina - 15.2.8109
