@@ -5,6 +5,10 @@
  */
 package iFrame;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import dao.*;
+
 /**
  *
  * @author eldi
@@ -16,8 +20,35 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.panelAltCliente.setVisible(false);
+        this.panelAltCarro.setVisible(false);
+        this.panelCadCarro.setVisible(false);
+        this.panelCadCliente.setVisible(false);
+        this.panelReserva.setVisible(false);
     }
+    
+    public void TabelaClientes(){
+        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        modelo.setNumRows(0);
+        ClienteDao dao = new ClienteDao();
+        for(Cliente list: dao.select() ){
+            
+            modelo.addRow(new Object[]{
+                list.getPropriedadeNome(),
+                list.getNumero(),
+        });
+        }
+    }
+    public void readComboBox(){
+        DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) boxPropriedade.getModel();
+        modelo1.removeAllElements();
+        PropriedadeDao cdao = new PropriedadeDao();
 
+        for(Propriedade list: cdao.select() ){
+            modelo1.addElement(list.getNome());
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,35 +58,497 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCadCarro = new javax.swing.JPanel();
+        fModelCarro = new javax.swing.JTextField();
+        fPlacaCarro = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        bSalvarCarro = new javax.swing.JButton();
+        bLimpaCarro = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        panelAltCliente = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        fEnderecoCliente1 = new javax.swing.JTextField();
+        fCPFCliente1 = new javax.swing.JTextField();
+        fNomeCliente1 = new javax.swing.JTextField();
+        bSalvar = new javax.swing.JButton();
+        panelCadCliente = new javax.swing.JPanel();
+        fNomeCliente = new javax.swing.JTextField();
+        fCPFCliente = new javax.swing.JTextField();
+        fEnderecoCliente = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        panelAltCarro = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        fPlacaCarro1 = new javax.swing.JTextField();
+        fModelCarro1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        panelReserva = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        salvarReserva = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        boxCliente = new javax.swing.JComboBox<>();
+        boxCarro = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        CadastroCarro = new javax.swing.JMenuItem();
+        CadastroCliente = new javax.swing.JMenuItem();
+        Reserva = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        AlteraCarro = new javax.swing.JMenuItem();
+        AlteraCliente = new javax.swing.JMenuItem();
+
+        fPlacaCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fPlacaCarroActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Modelo");
+
+        jLabel6.setText("Placa");
+
+        bSalvarCarro.setText("SALVAR");
+
+        bLimpaCarro.setText("LIMPAR");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("CADASTRO DE CARRO");
+
+        javax.swing.GroupLayout panelCadCarroLayout = new javax.swing.GroupLayout(panelCadCarro);
+        panelCadCarro.setLayout(panelCadCarroLayout);
+        panelCadCarroLayout.setHorizontalGroup(
+            panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCadCarroLayout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(bSalvarCarro)
+                .addGap(61, 61, 61)
+                .addComponent(bLimpaCarro)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCadCarroLayout.createSequentialGroup()
+                .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelCadCarroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(fModelCarro))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCadCarroLayout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 154, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCadCarroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fPlacaCarro)
+                            .addGroup(panelCadCarroLayout.createSequentialGroup()
+                                .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(0, 532, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        panelCadCarroLayout.setVerticalGroup(
+            panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCadCarroLayout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fModelCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(5, 5, 5)
+                .addComponent(fPlacaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
+                .addGroup(panelCadCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bSalvarCarro)
+                    .addComponent(bLimpaCarro))
+                .addContainerGap(169, Short.MAX_VALUE))
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "CPF", "Endereço"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("ALTERAÇÃO DE CLIENTE");
+
+        jLabel7.setText("Nome");
+
+        jLabel9.setText("CPF");
+
+        jLabel10.setText("Endereço");
+
+        fEnderecoCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fEnderecoCliente1ActionPerformed(evt);
+            }
+        });
+
+        fCPFCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fCPFCliente1ActionPerformed(evt);
+            }
+        });
+
+        bSalvar.setText("Salvar");
+
+        javax.swing.GroupLayout panelAltClienteLayout = new javax.swing.GroupLayout(panelAltCliente);
+        panelAltCliente.setLayout(panelAltClienteLayout);
+        panelAltClienteLayout.setHorizontalGroup(
+            panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAltClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltClienteLayout.createSequentialGroup()
+                        .addGroup(panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                            .addComponent(fNomeCliente1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fCPFCliente1)
+                            .addComponent(fEnderecoCliente1)
+                            .addGroup(panelAltClienteLayout.createSequentialGroup()
+                                .addGroup(panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltClienteLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bSalvar)
+                        .addGap(252, 252, 252))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
+        );
+        panelAltClienteLayout.setVerticalGroup(
+            panelAltClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAltClienteLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addGap(0, 0, 0)
+                .addComponent(fNomeCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addGap(5, 5, 5)
+                .addComponent(fCPFCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fEnderecoCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+        );
+
+        fCPFCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fCPFClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nome");
+
+        jLabel2.setText("CPF");
+
+        jLabel3.setText("Endereço");
+
+        jButton1.setText("SALVAR");
+
+        jButton2.setText("LIMPAR");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("CADASTRO DE CLIENTE");
+
+        javax.swing.GroupLayout panelCadClienteLayout = new javax.swing.GroupLayout(panelCadCliente);
+        panelCadCliente.setLayout(panelCadClienteLayout);
+        panelCadClienteLayout.setHorizontalGroup(
+            panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCadClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCadClienteLayout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jButton1)
+                        .addGap(61, 61, 61)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(fNomeCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fCPFCliente)
+                    .addComponent(fEnderecoCliente)
+                    .addGroup(panelCadClienteLayout.createSequentialGroup()
+                        .addGroup(panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCadClienteLayout.createSequentialGroup()
+                .addContainerGap(169, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163))
+        );
+        panelCadClienteLayout.setVerticalGroup(
+            panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCadClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(5, 5, 5)
+                .addComponent(fCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(panelCadClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Placa", "Modelo"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("ALTERAÇÃO DE CARRO");
+
+        jLabel12.setText("Placa");
+
+        jLabel13.setText("Modelo");
+
+        fPlacaCarro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fPlacaCarro1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("SALVAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelAltCarroLayout = new javax.swing.GroupLayout(panelAltCarro);
+        panelAltCarro.setLayout(panelAltCarroLayout);
+        panelAltCarroLayout.setHorizontalGroup(
+            panelAltCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAltCarroLayout.createSequentialGroup()
+                .addGroup(panelAltCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltCarroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelAltCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fModelCarro1)
+                            .addComponent(fPlacaCarro1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAltCarroLayout.createSequentialGroup()
+                                .addGroup(panelAltCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(panelAltCarroLayout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelAltCarroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltCarroLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+        );
+        panelAltCarroLayout.setVerticalGroup(
+            panelAltCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAltCarroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fModelCarro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel12)
+                .addGap(5, 5, 5)
+                .addComponent(fPlacaCarro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aluga Carro");
         setMaximumSize(new java.awt.Dimension(350, 600));
 
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Placa", "Modelo"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Reserva");
+
+        jLabel17.setText("Cliente");
+
+        salvarReserva.setText("SALVAR");
+        salvarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarReservaActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Carro");
+
+        javax.swing.GroupLayout panelReservaLayout = new javax.swing.GroupLayout(panelReserva);
+        panelReserva.setLayout(panelReservaLayout);
+        panelReservaLayout.setHorizontalGroup(
+            panelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReservaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+            .addGroup(panelReservaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReservaLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(117, 117, 117))
+            .addGroup(panelReservaLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boxCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
+            .addGroup(panelReservaLayout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addComponent(salvarReserva)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelReservaLayout.setVerticalGroup(
+            panelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReservaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(panelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addGap(0, 0, 0)
+                .addGroup(panelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(salvarReserva)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
         jMenu1.setText("Cadastro");
 
-        jMenuItem2.setText("Carro");
-        jMenu1.add(jMenuItem2);
+        CadastroCarro.setText("Carro");
+        CadastroCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastroCarroActionPerformed(evt);
+            }
+        });
+        jMenu1.add(CadastroCarro);
 
-        jMenuItem3.setText("Cliente");
-        jMenu1.add(jMenuItem3);
+        CadastroCliente.setText("Cliente");
+        CadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastroClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(CadastroCliente);
+
+        Reserva.setText("Reserva");
+        Reserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReservaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Reserva);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Alteração");
 
-        jMenuItem1.setText("Carro");
-        jMenu2.add(jMenuItem1);
+        AlteraCarro.setText("Carro");
+        AlteraCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlteraCarroActionPerformed(evt);
+            }
+        });
+        jMenu2.add(AlteraCarro);
 
-        jMenuItem4.setText("Cliente");
-        jMenu2.add(jMenuItem4);
+        AlteraCliente.setText("Cliente");
+        AlteraCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlteraClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(AlteraCliente);
 
         jMenuBar1.add(jMenu2);
 
@@ -65,15 +558,102 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(panelReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroClienteActionPerformed
+        // TODO add your handling code here:
+        System.out.println("CARRO");
+        this.panelCadCarro.setVisible(false);
+        this.panelCadCliente.setVisible(true);
+        
+        this.panelAltCliente.setVisible(false);
+        this.panelAltCarro.setVisible(false);
+    }//GEN-LAST:event_CadastroClienteActionPerformed
+
+    private void CadastroCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroCarroActionPerformed
+        // TODO add your handling code here:
+        this.panelCadCarro.setVisible(true);
+        this.panelCadCliente.setVisible(false);
+        
+        this.panelAltCliente.setVisible(false);
+        this.panelAltCarro.setVisible(false);
+        
+        this.panelReserva.setVisible(false);
+    }//GEN-LAST:event_CadastroCarroActionPerformed
+
+    private void AlteraCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlteraCarroActionPerformed
+        // TODO add your handling code here:
+        this.panelAltCliente.setVisible(false);
+        this.panelAltCarro.setVisible(true);
+        
+        this.panelCadCarro.setVisible(false);
+        this.panelCadCliente.setVisible(false);
+        
+        this.panelReserva.setVisible(false);
+    }//GEN-LAST:event_AlteraCarroActionPerformed
+
+    private void AlteraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlteraClienteActionPerformed
+        // TODO add your handling code here:
+        this.panelAltCliente.setVisible(true);
+        this.panelAltCarro.setVisible(false);
+        
+        this.panelCadCarro.setVisible(false);
+        this.panelCadCliente.setVisible(false);
+        
+        this.panelReserva.setVisible(false);
+    }//GEN-LAST:event_AlteraClienteActionPerformed
+
+    private void fCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fCPFClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fCPFClienteActionPerformed
+
+    private void fPlacaCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fPlacaCarroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fPlacaCarroActionPerformed
+
+    private void fCPFCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fCPFCliente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fCPFCliente1ActionPerformed
+
+    private void fEnderecoCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fEnderecoCliente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fEnderecoCliente1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void fPlacaCarro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fPlacaCarro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fPlacaCarro1ActionPerformed
+
+    private void salvarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salvarReservaActionPerformed
+
+    private void ReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservaActionPerformed
+        // TODO add your handling code here:
+        this.panelReserva.setVisible(true);
+        
+        this.panelAltCliente.setVisible(false);
+        this.panelAltCarro.setVisible(false);
+        
+        this.panelCadCarro.setVisible(false);
+        this.panelCadCliente.setVisible(false);
+    }//GEN-LAST:event_ReservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,12 +694,60 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AlteraCarro;
+    private javax.swing.JMenuItem AlteraCliente;
+    private javax.swing.JMenuItem CadastroCarro;
+    private javax.swing.JMenuItem CadastroCliente;
+    private javax.swing.JMenuItem Reserva;
+    private javax.swing.JButton bLimpaCarro;
+    private javax.swing.JButton bSalvar;
+    private javax.swing.JButton bSalvarCarro;
+    private javax.swing.JComboBox<String> boxCarro;
+    private javax.swing.JComboBox<String> boxCliente;
+    private javax.swing.JTextField fCPFCliente;
+    private javax.swing.JTextField fCPFCliente1;
+    private javax.swing.JTextField fEnderecoCliente;
+    private javax.swing.JTextField fEnderecoCliente1;
+    private javax.swing.JTextField fModelCarro;
+    private javax.swing.JTextField fModelCarro1;
+    private javax.swing.JTextField fNomeCliente;
+    private javax.swing.JTextField fNomeCliente1;
+    private javax.swing.JTextField fPlacaCarro;
+    private javax.swing.JTextField fPlacaCarro1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JPanel panelAltCarro;
+    private javax.swing.JPanel panelAltCliente;
+    private javax.swing.JPanel panelCadCarro;
+    private javax.swing.JPanel panelCadCliente;
+    private javax.swing.JPanel panelReserva;
+    private javax.swing.JButton salvarReserva;
     // End of variables declaration//GEN-END:variables
 }
