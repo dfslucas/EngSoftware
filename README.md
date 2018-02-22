@@ -21,4 +21,11 @@
 ![Windows5](print5.jpg)
 ![Windows6](print6.jpg)
 
-#
+#Diagramas
+![Diagrama1](/Diagramas/d1.jpg)
+![Diagrama2](/Diagramas/d2.jpg)
+![Diagrama3](/Diagramas/d3.jpg)
+![Diagrama4](/Diagramas/d4.jpg)
+![Diagrama5](/Diagramas/d5.jpg)
+![Diagrama6](/Diagramas/d6.jpg)
+![Diagrama7](/Diagramas/d7.jpg)
